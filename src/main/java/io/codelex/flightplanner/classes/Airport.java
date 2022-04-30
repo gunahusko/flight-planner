@@ -1,4 +1,4 @@
-package io.codelex.flightplanner.flights;
+package io.codelex.flightplanner.classes;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
@@ -21,6 +21,12 @@ public class Airport {
         return this.getCountry().trim().equalsIgnoreCase(airport.getCountry().trim())
                 && this.getCity().trim().equalsIgnoreCase(airport.getCity().trim())
                 && this.getAirport().trim().equalsIgnoreCase(airport.getAirport().trim());
+    }
+
+    public boolean matchesSearchRequest(String search) {
+        return this.getCountry().toLowerCase().contains(search.toLowerCase().trim())
+                || this.getCity().toLowerCase().contains(search.toLowerCase().trim())
+                || this.getAirport().toLowerCase().contains(search.toLowerCase().trim());
     }
 
     public String getCountry() {

@@ -1,10 +1,11 @@
-package io.codelex.flightplanner.flights;
+package io.codelex.flightplanner.services;
 
-import io.codelex.flightplanner.search.PageResult;
-import io.codelex.flightplanner.search.SearchFlightsRequest;
+import io.codelex.flightplanner.classes.AddFlightRequest;
+import io.codelex.flightplanner.classes.Flight;
+import io.codelex.flightplanner.repositories.FlightsRepository;
+import io.codelex.flightplanner.classes.PageResult;
+import io.codelex.flightplanner.classes.SearchFlightsRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class FlightsService {
@@ -32,9 +33,5 @@ public class FlightsService {
 
     public PageResult searchFlights(SearchFlightsRequest searchFlightsRequest) {
         return flightPlannerRepository.searchFlights(searchFlightsRequest);
-    }
-
-    public List<Airport> getAirportList(String search) {
-        return flightPlannerRepository.getAirportList(search);
     }
 }

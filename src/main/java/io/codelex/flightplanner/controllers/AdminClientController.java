@@ -1,16 +1,15 @@
 package io.codelex.flightplanner.controllers;
 
-import io.codelex.flightplanner.flights.AddFlightRequest;
-import io.codelex.flightplanner.flights.Flight;
-import io.codelex.flightplanner.flights.FlightsService;
+import io.codelex.flightplanner.classes.AddFlightRequest;
+import io.codelex.flightplanner.classes.Flight;
+import io.codelex.flightplanner.services.FlightsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 @RestController
-@RequestMapping ("/admin-api")
+@RequestMapping("/admin-api/flights")
 public class AdminClientController {
     private final FlightsService flightsService;
 
@@ -18,19 +17,19 @@ public class AdminClientController {
         this.flightsService = flightsService;
     }
 
-    @PutMapping("/flights")
+    @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public synchronized Flight addFlight(@Valid @NotNull @RequestBody AddFlightRequest addFlightRequest) {
+    public Flight addFlight(@Valid @RequestBody AddFlightRequest addFlightRequest) {
         return flightsService.addFlight(addFlightRequest);
     }
 
-    @GetMapping("/flights/{id}")
-    public synchronized Flight fetchFlight(@PathVariable("id") Long id) {
+    @GetMapping("/{id}")
+    public Flight fetchFlight(@PathVariable Long id) {
         return flightsService.getFlightById(id);
     }
 
-    @DeleteMapping("/flights/{id}")
-    public synchronized void deleteFlight(@NotNull @PathVariable("id") Long id) {
+    @DeleteMapping("/{id}")
+    public void deleteFlight(@PathVariable Long id) {
         flightsService.deleteFlight(id);
     }
 
