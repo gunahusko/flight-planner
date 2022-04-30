@@ -1,6 +1,4 @@
-package io.codelex.flightplanner.search;
-
-import io.codelex.flightplanner.flights.Flight;
+package io.codelex.flightplanner.classes;
 
 import java.util.List;
 
@@ -9,9 +7,9 @@ public class PageResult {
     private int totalItems;
     private List<Flight> items;
 
-    public PageResult(int page, int totalItems, List<Flight> items) {
-        this.page = page;
-        this.totalItems = totalItems;
+    public PageResult(List<Flight> items) {
+        this.page = 0;
+        this.totalItems = items.size();
         this.items = items;
     }
 

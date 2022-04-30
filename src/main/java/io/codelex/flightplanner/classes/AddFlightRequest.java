@@ -1,4 +1,4 @@
-package io.codelex.flightplanner.flights;
+package io.codelex.flightplanner.classes;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -19,21 +19,18 @@ public class AddFlightRequest {
     @NotEmpty
     private String carrier;
     @NotNull
-    @Valid
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime departureTime;
     @NotNull
-    @Valid
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime arrivalTime;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public AddFlightRequest(Airport from, Airport to, String carrier, String departureTime, String arrivalTime) {
         this.from = from;
         this.to = to;
         this.carrier = carrier;
-        this.departureTime = LocalDateTime.parse(departureTime, formatter);
-        this.arrivalTime = LocalDateTime.parse(arrivalTime, formatter);
+        this.departureTime = LocalDateTime.parse(departureTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.arrivalTime = LocalDateTime.parse(arrivalTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     public boolean airportsAreEqual() {
@@ -72,21 +69,18 @@ public class AddFlightRequest {
         return departureTime;
     }
 
-    public void setDepartureTime(LocalDateTime departureTime) {
-        this.departureTime = departureTime;
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = LocalDateTime.parse(departureTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(LocalDateTime arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = LocalDateTime.parse(arrivalTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
-    public DateTimeFormatter getFormatter() {
-        return formatter;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -106,7 +100,7 @@ public class AddFlightRequest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFrom(), getTo(), getCarrier(), getDepartureTime(), getArrivalTime(), getFormatter());
+        return Objects.hash(getFrom(), getTo(), getCarrier(), getDepartureTime(), getArrivalTime());
     }
 
     @Override
