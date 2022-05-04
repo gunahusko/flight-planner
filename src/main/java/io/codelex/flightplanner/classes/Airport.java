@@ -19,14 +19,14 @@ public class Airport {
 
     public boolean isEqualAirport(Airport airport) {
         return this.getCountry().trim().equalsIgnoreCase(airport.getCountry().trim())
-                && this.getCity().trim().equalsIgnoreCase(airport.getCity().trim())
-                && this.getAirport().trim().equalsIgnoreCase(airport.getAirport().trim());
+                && getCity().trim().equalsIgnoreCase(airport.getCity().trim())
+                && getAirport().trim().equalsIgnoreCase(airport.getAirport().trim());
     }
 
     public boolean matchesSearchRequest(String search) {
         return this.getCountry().toLowerCase().contains(search.toLowerCase().trim())
-                || this.getCity().toLowerCase().contains(search.toLowerCase().trim())
-                || this.getAirport().toLowerCase().contains(search.toLowerCase().trim());
+                || getCity().toLowerCase().contains(search.toLowerCase().trim())
+                || getAirport().toLowerCase().contains(search.toLowerCase().trim());
     }
 
     public String getCountry() {

@@ -24,13 +24,13 @@ public class FlightsRepository {
     }
 
     public synchronized Flight addFlight(AddFlightRequest addFlightRequest) {
-        for (Flight flight : listOfFlights) {
-            if (flight.isEqualFlight(addFlightRequest)) {
+        for (Flight flights : listOfFlights) {
+            if (flights.areEqualFlights(addFlightRequest)) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT);
             }
         }
 
-        if (addFlightRequest.airportsAreEqual()) {
+        if (addFlightRequest.areEqualAirports()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
@@ -63,7 +63,7 @@ public class FlightsRepository {
     }
 
     public synchronized void deleteFlight(Long id) {
-        listOfFlights.removeIf(flight -> flight.getId() == id);
+        listOfFlights.removeIf(flight -> flight.getId().equals(id));
     }
 
     public void clearFlights() {

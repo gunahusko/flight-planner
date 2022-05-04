@@ -37,5 +37,4 @@ public class CustomerClientController {
     public Flight findFlightById(@PathVariable Long id) {
         return flightsService.getFlightById(id);
     }
-
 }
