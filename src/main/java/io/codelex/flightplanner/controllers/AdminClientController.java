@@ -32,5 +32,4 @@ public class AdminClientController {
     public void deleteFlight(@PathVariable Long id) {
         flightsService.deleteFlight(id);
     }
-
 }

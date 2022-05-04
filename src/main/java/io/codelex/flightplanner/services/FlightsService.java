@@ -2,9 +2,9 @@ package io.codelex.flightplanner.services;
 
 import io.codelex.flightplanner.classes.AddFlightRequest;
 import io.codelex.flightplanner.classes.Flight;
-import io.codelex.flightplanner.repositories.FlightsRepository;
 import io.codelex.flightplanner.classes.PageResult;
 import io.codelex.flightplanner.classes.SearchFlightsRequest;
+import io.codelex.flightplanner.repositories.FlightsRepository;
 import org.springframework.stereotype.Service;
 
 @Service

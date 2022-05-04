@@ -7,33 +7,33 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 public class AddFlightRequest {
     @NotNull
     @Valid
-    private Airport from;
+    private final Airport from;
     @NotNull
     @Valid
-    private Airport to;
+    private final Airport to;
     @NotEmpty
-    private String carrier;
+    private final String carrier;
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime departureTime;
+    private final LocalDateTime departureTime;
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime arrivalTime;
+    private final LocalDateTime arrivalTime;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public AddFlightRequest(Airport from, Airport to, String carrier, String departureTime, String arrivalTime) {
         this.from = from;
         this.to = to;
         this.carrier = carrier;
-        this.departureTime = LocalDateTime.parse(departureTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        this.arrivalTime = LocalDateTime.parse(arrivalTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.departureTime = LocalDateTime.parse(departureTime, formatter);
+        this.arrivalTime = LocalDateTime.parse(arrivalTime, formatter);
     }
 
-    public boolean airportsAreEqual() {
+    public boolean areEqualAirports() {
         return from.isEqualAirport(to);
     }
 
@@ -45,71 +45,19 @@ public class AddFlightRequest {
         return from;
     }
 
-    public void setFrom(Airport from) {
-        this.from = from;
-    }
-
     public Airport getTo() {
         return to;
-    }
-
-    public void setTo(Airport to) {
-        this.to = to;
     }
 
     public String getCarrier() {
         return carrier;
     }
 
-    public void setCarrier(String carrier) {
-        this.carrier = carrier;
-    }
-
     public LocalDateTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = LocalDateTime.parse(departureTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-    }
-
     public LocalDateTime getArrivalTime() {
         return arrivalTime;
-    }
-
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = LocalDateTime.parse(arrivalTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof AddFlightRequest)) {
-            return false;
-        }
-        AddFlightRequest that = (AddFlightRequest) o;
-        return getFrom().equals(that.getFrom())
-                && getTo().equals(that.getTo())
-                && getCarrier().equals(that.getCarrier())
-                && getDepartureTime().equals(that.getDepartureTime())
-                && getArrivalTime().equals(that.getArrivalTime());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getFrom(), getTo(), getCarrier(), getDepartureTime(), getArrivalTime());
-    }
-
-    @Override
-    public String toString() {
-        return "AddFlightRequest{"
-                + "from=" + from
-                + ", to=" + to
-                + ", carrier='" + carrier + '\''
-                + ", departureTime=" + departureTime
-                + ", arrivalTime=" + arrivalTime + '}';
     }
 }
