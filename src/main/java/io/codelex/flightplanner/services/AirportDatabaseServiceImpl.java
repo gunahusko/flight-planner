@@ -21,11 +21,6 @@ public class AirportDatabaseServiceImpl implements AirportService {
     @Override
     @Transactional
     public List<Airport> searchAirports(String search) {
-//        return airportDatabaseRepository.findAll()
-//                .stream()
-//                .filter(airport -> airport.matchesSearchRequest(search))
-//                .collect(Collectors.toList());
-
     return airportDatabaseRepository.searchAirport(search.toLowerCase().trim());
     }
 
