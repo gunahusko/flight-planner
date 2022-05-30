@@ -1,20 +1,29 @@
 package io.codelex.flightplanner.classes;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
+@Entity
 public class Airport {
     @NotEmpty
     private String country;
     @NotEmpty
     private String city;
+    @Id
     @NotEmpty
+    @Column(name = "airport_id")
     private String airport;
 
     public Airport(String country, String city, String airport) {
         this.country = country;
         this.city = city;
         this.airport = airport.toUpperCase();
+    }
+
+    public Airport() {
     }
 
     public boolean isEqualAirport(Airport airport) {
