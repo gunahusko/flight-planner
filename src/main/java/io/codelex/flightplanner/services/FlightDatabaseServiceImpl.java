@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @ConditionalOnProperty(prefix = "flight-planner", name = "store-type", havingValue = "database")
@@ -68,10 +71,16 @@ public class FlightDatabaseServiceImpl extends AbstractFlightService implements 
     @Override
     @Transactional
     public PageResult searchFlights(SearchFlightsRequest searchFlightsRequest) {
-        return new PageResult(flightDatabaseRepository.findAll()
-                .stream()
-                .filter(flight -> flight.matchesSearchRequest(searchFlightsRequest))
-                .collect(Collectors.toList()));
+        List<Flight> listOfFlights = new ArrayList<>();
+
+        flightDatabaseRepository.findByFromAndToAndDepartureTime(
+                searchFlightsRequest.getFrom(),
+                searchFlightsRequest.getTo(),
+                LocalDateTime.of(searchFlightsRequest.getDepartureDate(), LocalTime.of(0, 0)))
+                .ifPresent(listOfFlights::add);
+
+        return new PageResult(listOfFlights);
+
     }
 
     @Override

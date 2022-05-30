@@ -4,7 +4,7 @@ import io.codelex.flightplanner.classes.Airport;
 import io.codelex.flightplanner.classes.Flight;
 import io.codelex.flightplanner.classes.PageResult;
 import io.codelex.flightplanner.classes.SearchFlightsRequest;
-import io.codelex.flightplanner.services.AirportServiceImpl;
+import io.codelex.flightplanner.services.AirportService;
 import io.codelex.flightplanner.services.FlightsService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +16,9 @@ import java.util.List;
 @RequestMapping("/api")
 public class CustomerClientController {
     private final FlightsService flightsService;
-    private final AirportServiceImpl airportService;
+    private final AirportService airportService;
 
-    public CustomerClientController(FlightsService flightsService, AirportServiceImpl airportService) {
+    public CustomerClientController(FlightsService flightsService, AirportService airportService) {
         this.flightsService = flightsService;
         this.airportService = airportService;
     }
