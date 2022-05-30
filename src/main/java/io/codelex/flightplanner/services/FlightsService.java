@@ -4,34 +4,16 @@ import io.codelex.flightplanner.classes.AddFlightRequest;
 import io.codelex.flightplanner.classes.Flight;
 import io.codelex.flightplanner.classes.PageResult;
 import io.codelex.flightplanner.classes.SearchFlightsRequest;
-import io.codelex.flightplanner.repositories.FlightsRepository;
-import org.springframework.stereotype.Service;
 
-@Service
-public class FlightsService {
-    private final FlightsRepository flightPlannerRepository;
+public interface FlightsService {
 
-    public FlightsService(FlightsRepository flightPlannerRepository) {
-        this.flightPlannerRepository = flightPlannerRepository;
-    }
+    Flight addFlight(AddFlightRequest addFlightRequest);
 
-    public Flight addFlight(AddFlightRequest addFlightRequest) {
-        return flightPlannerRepository.addFlight(addFlightRequest);
-    }
+    Flight getFlightById(Long id);
 
-    public Flight getFlightById(Long id) {
-        return flightPlannerRepository.getFlightById(id);
-    }
+    void deleteFlight(Long id);
 
-    public void deleteFlight(Long id) {
-        flightPlannerRepository.deleteFlight(id);
-    }
+    void clearFlights();
 
-    public void clearFlights() {
-        flightPlannerRepository.clearFlights();
-    }
-
-    public PageResult searchFlights(SearchFlightsRequest searchFlightsRequest) {
-        return flightPlannerRepository.searchFlights(searchFlightsRequest);
-    }
+    PageResult searchFlights(SearchFlightsRequest searchFlightsRequest);
 }

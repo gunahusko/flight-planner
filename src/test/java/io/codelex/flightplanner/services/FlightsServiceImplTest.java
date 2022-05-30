@@ -13,13 +13,13 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class FlightsServiceTest {
+public class FlightsServiceImplTest {
 
     @Mock
     FlightsRepository flightsRepository;
 
     @InjectMocks
-    FlightsService flightsService;
+    FlightsServiceImpl flightsServiceImpl;
 
     @Test
     public void testAddFlight() {
@@ -37,7 +37,7 @@ public class FlightsServiceTest {
             return new Flight(67L, request);
         }).when(flightsRepository).addFlight(addFlightRequest);
 
-        Flight flight = flightsService.addFlight(addFlightRequest);
+        Flight flight = flightsServiceImpl.addFlight(addFlightRequest);
 
         Mockito.verify(flightsRepository).addFlight(addFlightRequest);
     }
